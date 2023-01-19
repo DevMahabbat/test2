@@ -1,0 +1,17 @@
+(function(){
+  window['optimizely'] = window['optimizely'] || [];
+  window['optimizely'].push(['activateGeoDelayedExperiments', {
+    'location':{
+      'city': "BAKU",
+      'continent': "AS",
+      'country': "AZ",
+      'region': "",
+      'dma': ""
+    },
+    'ip':"85.132.96.218"
+  }]);
+})
+//
+()
+
+;

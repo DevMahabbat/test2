@@ -1,0 +1,242 @@
+var AdviadAd = {};
+AdviadAd.adsUrl = "https://ads.adviad.com/www/images/"
+AdviadAd.currentScript = document.currentScript;
+AdviadAd.frame = document.createElement("iframe");
+AdviadAd.frame.src = AdviadAd.adsUrl + window.adFramePath;
+AdviadAd.frame.width = window.adFrameWidth;
+AdviadAd.frame.height = window.adFrameHeight;
+AdviadAd.frame.style.border = "none";
+AdviadAd.frame.style.overflow = "hidden";
+AdviadAd.frame.scrolling = "no";
+
+
+AdviadAd.clickDiv = document.createElement("div");
+AdviadAd.clickDiv.style.width = AdviadAd.frame.width;
+AdviadAd.clickDiv.style.height = AdviadAd.frame.height;
+AdviadAd.clickDiv.style.position = "absolute";
+AdviadAd.clickDiv.style.zIndex = "9999";
+AdviadAd.clickDiv.style.cursor = "pointer";
+AdviadAd.clickDiv.onclick = function () {
+    window.open(window.adFrameClick);
+}
+
+if(!document.currentScript.src.includes('noclick')){
+    AdviadAd.currentScript.parentNode.appendChild(AdviadAd.clickDiv);
+}
+
+AdviadAd.currentScript.parentNode.appendChild(AdviadAd.frame);
+
+
+AdviadAd.info = document.createElement("div");
+AdviadAd.info.id = "adviad-ad";
+AdviadAd.info.style.zIndex = "99999";
+AdviadAd.info.classList.add("ad");
+
+function showPrivacy() {
+    let adviad_ad = document.getElementById('adviad-ad');
+    adviad_ad.classList.add("show-privacy");
+}
+
+function clickClose() {
+    let adviad_ad = document.getElementById('adviad-ad');
+    adviad_ad.classList.remove("show-privacy");
+}
+
+//region info Style
+AdviadAd.infoStyle = "<style>" +
+    'body {\n' +
+    '    margin: 0px;\n'+
+    '}\n' +
+    '\n' +
+    ".ad {\n" +
+    "    border: none;\n" +
+    "    width: 105px;\n" +
+    "    height: 18px;\n" +
+    "    background-color: transparent;\n" +
+    "    position: absolute;\n" +
+    "    z-index: 100;\n" +
+    "    top: 0;\n" +
+    "    right: 0;\n" +
+    "}\n" +
+    "\n" +
+    ".show-privacy," +
+    ".show-privacy .ad {\n" +
+    "    width: 100% !important;\n" +
+    "    height: 100% !important;\n" +
+    "}\n" +
+    "\n" +
+    ".privacy {\n" +
+    "    display: none;\n" +
+    "    background-color: rgb(255, 255, 255, 0.9);\n" +
+    "    width: 100%;\n" +
+    "    height: 100%;\n" +
+    "    position: absolute;\n" +
+    "    top: 0;\n" +
+    "    left: 0;\n" +
+    "}\n" +
+    "\n" +
+    ".privacy span {\n" +
+    "    width: 30px;\n" +
+    "}\n" +
+    "\n" +
+    ".show-privacy .privacy {\n" +
+    "    display: block;\n" +
+    "}\n" +
+    "\n" +
+    ".privacy-block {\n" +
+    "    display: flex;\n" +
+    "    align-items: center;\n" +
+    "    justify-content: center;\n" +
+    "    width: 100%;\n" +
+    "    height: 100%;\n" +
+    "    position: relative;\n" +
+    "}\n" +
+    "\n" +
+    ".privacy-text {\n" +
+    "    padding: 10px;\n" +
+    "    color: #000;\n" +
+    "    font-size: 10px;\n" +
+    "    text-align: center;\n" +
+    "    font-weight: bold;\n" +
+    "    font-family: sans-serif;\n" +
+    "}\n" +
+    "\n" +
+    ".privacy a {\n" +
+    "    text-decoration: none;\n" +
+    "}\n" +
+    "\n" +
+    ".ad-icon {\n" +
+    "    position: absolute;\n" +
+    "    top: 0;\n" +
+    "    right: 0;\n" +
+    "    width: 20px;\n" +
+    "    height: 20px;\n" +
+    "    background-color: rgb(0, 0, 0, 0.35);\n" +
+    "    color: #fff;\n" +
+    "    display: flex;\n" +
+    "    align-items: center;\n" +
+    "    justify-content: center;\n" +
+    "    z-index: 10;\n" +
+    "    cursor: pointer;\n" +
+    "}\n" +
+    "\n" +
+    ".ad #show-icon {\n" +
+    "    display: flex;\n" +
+    "    opacity: 0.9;\n" +
+    "}\n" +
+    "\n" +
+    ".ad .ad-icon {\n" +
+    "    background-color: rgba(0, 0, 0, 0.44);\n" +
+    "    width: 16px;\n" +
+    "    height: 16px;\n" +
+    "    top: 2px;\n" +
+    "    right: 1.3px;\n" +
+    "}\n" +
+    "\n" +
+    ".ad a {\n" +
+    "    text-decoration: none;\n" +
+    "}\n" +
+    "\n" +
+    "#adviad-info-logo .info {\n" +
+    "    display: block;\n" +
+    "    background: rgba(0, 0, 0, 0.44);\n" +
+    "    position: absolute;\n" +
+    "    padding-top: 1.5px;\n" +
+    "    padding-left: 2px;\n" +
+    "    top: 0;\n" +
+    "    right: 0;\n" +
+    "    height: 14.5px;\n" +
+    "    border-bottom-left-radius: 5px;\n" +
+    "}\n" +
+    "\n" +
+    "/*#adviad-info-logo:hover .info {\n" +
+    "    display: block;\n" +
+    "}*/\n" +
+    "\n" +
+    ".ad .privacy-text p {\n" +
+    "    font-size: 12px;\n" +
+    "    color: #0873f6;\n" +
+    "    padding: 3px 0;\n" +
+    "}\n" +
+    "\n" +
+    ".ad #close-icon {\n" +
+    "    display: none;\n" +
+    "    width: 15px;\n" +
+    "    height: 15px;\n" +
+    "}\n" +
+    "\n" +
+    ".show-privacy #show-icon {\n" +
+    "    display: none;\n" +
+    "}\n" +
+    "\n" +
+    ".show-privacy #close-icon {\n" +
+    "    display: flex;\n" +
+    "}\n" +
+    "\n" +
+    "#adviad-info-logo {\n" +
+    "    width: 16px;\n" +
+    "    height: 16px;\n" +
+    "    display: block;\n" +
+    "}\n" +
+    "\n" +
+    ".adviad-info {\n" +
+    "    display: block;\n" +
+    "    right: 17px;\n" +
+    "    position: absolute;\n" +
+    "    top: 2px;\n" +
+    "    opacity: 0.9;\n" +
+    "}\n" +
+    "\n" +
+    ".ad-icon:hover {\n" +
+    "    background-color: #4b97f5 !important;\n" +
+    "}\n" +
+    "</style>";
+
+//endregion
+
+//region Info html
+AdviadAd.info.innerHTML =
+    AdviadAd.infoStyle +
+    '<div id="adviad-ad" class="ad">\n' +
+    '            <div class="adviad-info">\n' +
+    '                <a id="adviad-info-logo" target="_blank" href="https://adviad.com">\n' +
+    '                    <!-- <div id="adviad"></div> -->\n' +
+    '                    <div id="adviad-info" class="info"></div>\n' +
+    '                </a>\n' +
+    '            </div>\n' +
+    '            <div id="show-icon" class="ad-icon" onclick="showPrivacy()"></div>\n' +
+    '            <div id="close-icon" class="ad-icon" onclick="clickClose()"></div>\n' +
+    '            <div class="privacy">\n' +
+    '                <a href="https://adviad.com/privacy-policy" target="_blank">\n' +
+    '                    <div class="privacy-block">\n' +
+    '                        <div class="privacy-text">\n' +
+    '                            <a href="https://adviad.com/privacy-policy" target="_blank" id="privacy-text"></a>\n' +
+    '                        </div>\n' +
+    '                    </div>\n' +
+    '                </a>\n' +
+    '            </div>\n' +
+    '        </div>';
+
+//endregion
+
+AdviadAd.currentScript.parentNode.appendChild(AdviadAd.info);
+
+//region svg
+//document.getElementById("adviad").innerHTML = "<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 20 20' style='enable-background:new 0 0 20 20;filter: brightness(0) invert(1);top:0;position:absolute;' xml:space='preserve'><path class='st0' d='M10,3.1c-3.8,0-6.9,3.1-6.9,6.9c0,3.8,3.1,6.9,6.9,6.9c3.8,0,6.9-3.1,6.9-6.9C16.9,6.2,13.8,3.1,10,3.1z M7.5,11.5c0,0.2-0.1,0.3-0.3,0.3s-0.3-0.1-0.3-0.3c0,0,0,0,0,0s0,0,0,0c0-0.2,0.1-0.3,0.3-0.3S7.5,11.3,7.5,11.5 C7.5,11.5,7.5,11.5,7.5,11.5C7.5,11.5,7.5,11.5,7.5,11.5z M7.6,9.7c0,0.2-0.2,0.4-0.4,0.4c-0.2,0-0.4-0.2-0.4-0.4c0,0,0,0,0,0 s0,0,0,0c0-0.2,0.2-0.4,0.4-0.4C7.4,9.3,7.6,9.5,7.6,9.7C7.6,9.7,7.6,9.7,7.6,9.7C7.6,9.7,7.6,9.7,7.6,9.7z M7.2,8.5 c-0.3,0-0.6-0.3-0.6-0.6c0-0.3,0.3-0.6,0.6-0.6c0.3,0,0.6,0.3,0.6,0.6C7.8,8.2,7.5,8.5,7.2,8.5z M10.4,14.2c0,0.2-0.1,0.3-0.3,0.3 s-0.3-0.1-0.3-0.3c0,0,0,0,0,0s0,0,0,0c0-0.2,0.1-0.3,0.3-0.3S10.4,14,10.4,14.2C10.4,14.2,10.4,14.2,10.4,14.2 C10.4,14.2,10.4,14.2,10.4,14.2z M10.5,12.3c0,0.2-0.2,0.4-0.4,0.4s-0.4-0.2-0.4-0.4c0,0,0,0,0,0s0,0,0,0c0-0.2,0.2-0.4,0.4-0.4 S10.5,12,10.5,12.3C10.5,12.3,10.5,12.3,10.5,12.3C10.5,12.3,10.5,12.3,10.5,12.3z M10.1,10.8c-0.3,0-0.6-0.3-0.6-0.6 s0.3-0.6,0.6-0.6s0.6,0.3,0.6,0.6S10.4,10.8,10.1,10.8z M10.1,9C9.7,9,9.4,8.6,9.4,8.2s0.3-0.7,0.7-0.7s0.7,0.3,0.7,0.7 C10.8,8.6,10.5,9,10.1,9z M11,6.2c0,0.5-0.4,0.9-0.9,0.9S9.2,6.7,9.2,6.2c0,0,0,0,0,0s0,0,0,0c0-0.5,0.4-0.9,0.9-0.9S11,5.7,11,6.2 C11,6.2,11,6.2,11,6.2C11,6.2,11,6.2,11,6.2z M13.3,11.5c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3c0,0,0,0,0,0s0,0,0,0 c0-0.2,0.1-0.3,0.3-0.3C13.2,11.2,13.3,11.3,13.3,11.5C13.3,11.5,13.3,11.5,13.3,11.5C13.3,11.5,13.3,11.5,13.3,11.5z M13.5,9.7 c0,0.2-0.2,0.4-0.4,0.4c-0.2,0-0.4-0.2-0.4-0.4c0,0,0,0,0,0s0,0,0,0c0-0.2,0.2-0.4,0.4-0.4C13.3,9.3,13.5,9.5,13.5,9.7 C13.5,9.7,13.5,9.7,13.5,9.7C13.5,9.7,13.5,9.7,13.5,9.7z M13,8.5c-0.3,0-0.6-0.3-0.6-0.6c0-0.3,0.3-0.6,0.6-0.6 c0.3,0,0.6,0.3,0.6,0.6C13.6,8.2,13.3,8.5,13,8.5z'></path></svg>";
+document.getElementById("adviad-info").innerHTML = "<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 224 42.5\" style=\"width:75px;padding: 0 5px;enable-background:new 0 0 224 42.5;\" xml:space=\"preserve\"><style type=\"text/css\">.st0{fill:#FFFFFF;}</style><g><path class=\"st0\" d=\"M28.1,29.3h-3.8l-2.1-5.5h-9.8l-2.1,5.5H6.6l8.6-21.7h4.4L28.1,29.3z M13.6,20.4h7.2l-3.6-9.4L13.6,20.4z\"/><path class=\"st0\" d=\"M42,16.2V7h3.2v22.3H42v-1.8c-1,1.3-2.6,2.2-4.7,2.2c-4.2,0-7.4-3.3-7.4-7.8c0-4.5,3.3-7.8,7.4-7.8C39.4,14,40.9,14.9,42,16.2z M33.2,21.8c0,2.6,1.7,4.8,4.5,4.8c2.7,0,4.5-2,4.5-4.8c0-2.7-1.8-4.8-4.5-4.8C34.9,17.1,33.2,19.2,33.2,21.8z\"/><path class=\"st0\" d=\"M60.4,18.1c-0.9-0.6-2.7-1.3-4.6-1.3c-1.8,0-2.8,0.7-2.8,1.8c0,1,1.1,1.3,2.4,1.5l1.5,0.2c3.2,0.5,5.2,1.8,5.2,4.4c0,2.8-2.5,4.8-6.8,4.8c-1.5,0-4.2-0.3-6.4-1.9l1.5-2.4c1.1,0.8,2.5,1.5,4.9,1.5c2.2,0,3.4-0.7,3.4-1.8c0-0.8-0.8-1.4-2.6-1.6l-1.5-0.2c-3.3-0.4-5-2-5-4.4c0-2.9,2.4-4.8,6.1-4.8c2.3,0,4.5,0.6,6,1.6L60.4,18.1z\"/><path class=\"st0\" d=\"M89.6,21.8c0,4.5-3.3,7.8-7.4,7.8c-2.1,0-3.6-0.9-4.6-2.2v1.8h-3.2V7h3.2v9.2c1-1.3,2.5-2.2,4.6-2.2C86.3,14,89.6,17.3,89.6,21.8z M77.3,21.8c0,2.7,1.8,4.8,4.5,4.8c2.8,0,4.5-2.2,4.5-4.8c0-2.6-1.7-4.8-4.5-4.8C79.1,17.1,77.3,19.1,77.3,21.8z\"/><path class=\"st0\" d=\"M95.7,35.5h-3.6l5.3-9.3l-6.6-11.8h3.6l4.8,8.5l4.6-8.5h3.6L95.7,35.5z\"/><path class=\"st0\" d=\"M136.9,29.3h-3.8l-2.1-5.5h-9.8l-2.1,5.5h-3.6l8.6-21.7h4.4L136.9,29.3z M122.4,20.4h7.2l-3.6-9.4L122.4,20.4z\"/><path class=\"st0\" d=\"M150.7,16.2V7h3.2v22.3h-3.2v-1.8c-1,1.3-2.6,2.2-4.7,2.2c-4.2,0-7.4-3.3-7.4-7.8c0-4.5,3.3-7.8,7.4-7.8C148.2,14,149.7,14.9,150.7,16.2z M142,21.8c0,2.6,1.7,4.8,4.5,4.8c2.7,0,4.5-2,4.5-4.8c0-2.7-1.8-4.8-4.5-4.8C143.7,17.1,142,19.2,142,21.8z\"/><path class=\"st0\" d=\"M166.7,29.3h-3.8l-6-14.8h3.5l4.4,11.5l4.4-11.5h3.4L166.7,29.3z\"/><path class=\"st0\" d=\"M179.4,9.3c0,1.3-1,2.3-2.3,2.3c-1.3,0-2.3-1-2.3-2.3c0-1.3,1-2.3,2.3-2.3C178.4,7,179.4,8,179.4,9.3z M178.7,29.3h-3.3V14.4h3.3V29.3z\"/><path class=\"st0\" d=\"M198.1,29.3h-3.2v-1.8c-1,1.3-2.6,2.2-4.7,2.2c-4.2,0-7.4-3.3-7.4-7.8c0-4.5,3.3-7.8,7.4-7.8c2.1,0,3.6,0.9,4.7,2.2v-1.8h3.2V29.3z M186.1,21.8c0,2.6,1.7,4.8,4.5,4.8c2.7,0,4.5-2,4.5-4.8c0-2.7-1.8-4.8-4.5-4.8C187.8,17.1,186.1,19.2,186.1,21.8z\"/><path class=\"st0\" d=\"M214.2,16.2V7h3.2v22.3h-3.2v-1.8c-1,1.3-2.6,2.2-4.7,2.2c-4.2,0-7.4-3.3-7.4-7.8c0-4.5,3.3-7.8,7.4-7.8C211.6,14,213.2,14.9,214.2,16.2z M205.4,21.8c0,2.6,1.7,4.8,4.5,4.8c2.7,0,4.5-2,4.5-4.8c0-2.7-1.8-4.8-4.5-4.8C207.1,17.1,205.4,19.2,205.4,21.8z\"/></g></svg>";
+document.getElementById("show-icon").innerHTML = "<svg style='width:17px;enable-background:new 0 0 20 20;filter: brightness(0) invert(1);top:0;position:absolute;' version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 20 20' xml:space='preserve'><path class='st0' d='M10,3.1c-3.8,0-6.9,3.1-6.9,6.9c0,3.8,3.1,6.9,6.9,6.9c3.8,0,6.9-3.1,6.9-6.9C16.9,6.2,13.8,3.1,10,3.1z M7.5,11.5c0,0.2-0.1,0.3-0.3,0.3s-0.3-0.1-0.3-0.3c0,0,0,0,0,0s0,0,0,0c0-0.2,0.1-0.3,0.3-0.3S7.5,11.3,7.5,11.5 C7.5,11.5,7.5,11.5,7.5,11.5C7.5,11.5,7.5,11.5,7.5,11.5z M7.6,9.7c0,0.2-0.2,0.4-0.4,0.4c-0.2,0-0.4-0.2-0.4-0.4c0,0,0,0,0,0 s0,0,0,0c0-0.2,0.2-0.4,0.4-0.4C7.4,9.3,7.6,9.5,7.6,9.7C7.6,9.7,7.6,9.7,7.6,9.7C7.6,9.7,7.6,9.7,7.6,9.7z M7.2,8.5 c-0.3,0-0.6-0.3-0.6-0.6c0-0.3,0.3-0.6,0.6-0.6c0.3,0,0.6,0.3,0.6,0.6C7.8,8.2,7.5,8.5,7.2,8.5z M10.4,14.2c0,0.2-0.1,0.3-0.3,0.3 s-0.3-0.1-0.3-0.3c0,0,0,0,0,0s0,0,0,0c0-0.2,0.1-0.3,0.3-0.3S10.4,14,10.4,14.2C10.4,14.2,10.4,14.2,10.4,14.2 C10.4,14.2,10.4,14.2,10.4,14.2z M10.5,12.3c0,0.2-0.2,0.4-0.4,0.4s-0.4-0.2-0.4-0.4c0,0,0,0,0,0s0,0,0,0c0-0.2,0.2-0.4,0.4-0.4 S10.5,12,10.5,12.3C10.5,12.3,10.5,12.3,10.5,12.3C10.5,12.3,10.5,12.3,10.5,12.3z M10.1,10.8c-0.3,0-0.6-0.3-0.6-0.6 s0.3-0.6,0.6-0.6s0.6,0.3,0.6,0.6S10.4,10.8,10.1,10.8z M10.1,9C9.7,9,9.4,8.6,9.4,8.2s0.3-0.7,0.7-0.7s0.7,0.3,0.7,0.7 C10.8,8.6,10.5,9,10.1,9z M11,6.2c0,0.5-0.4,0.9-0.9,0.9S9.2,6.7,9.2,6.2c0,0,0,0,0,0s0,0,0,0c0-0.5,0.4-0.9,0.9-0.9S11,5.7,11,6.2 C11,6.2,11,6.2,11,6.2C11,6.2,11,6.2,11,6.2z M13.3,11.5c0,0.2-0.1,0.3-0.3,0.3c-0.2,0-0.3-0.1-0.3-0.3c0,0,0,0,0,0s0,0,0,0 c0-0.2,0.1-0.3,0.3-0.3C13.2,11.2,13.3,11.3,13.3,11.5C13.3,11.5,13.3,11.5,13.3,11.5C13.3,11.5,13.3,11.5,13.3,11.5z M13.5,9.7 c0,0.2-0.2,0.4-0.4,0.4c-0.2,0-0.4-0.2-0.4-0.4c0,0,0,0,0,0s0,0,0,0c0-0.2,0.2-0.4,0.4-0.4C13.3,9.3,13.5,9.5,13.5,9.7 C13.5,9.7,13.5,9.7,13.5,9.7C13.5,9.7,13.5,9.7,13.5,9.7z M13,8.5c-0.3,0-0.6-0.3-0.6-0.6c0-0.3,0.3-0.6,0.6-0.6 c0.3,0,0.6,0.3,0.6,0.6C13.6,8.2,13.3,8.5,13,8.5z'></path></svg>";
+//document.getElementById("show-icon").innerHTML = "<svg style='width:17px;filter: brightness(0) invert(1);' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 15 15'> <path d='M7.5,1.5a6,6,0,1,0,0,12a6,6,0,1,0,0,-12m0,1a5,5,0,1,1,0,10a5,5,0,1,1,0,-10ZM6.625,11l1.75,0l0,-4.5l-1.75,0ZM7.5,3.75a1,1,0,1,0,0,2a1,1,0,1,0,0,-2Z'></path></svg>";
+document.getElementById("close-icon").innerHTML = "<svg style='filter: brightness(0) invert(1);' width='15' height='15' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'> <path d='M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z' fill='currentColor'></path></svg>";
+//endregion
+
+//region meta
+var meta = document.createElement('meta');
+meta.name = "viewport";
+meta.content = "width=device-width, initial-scale=1.0";
+document.getElementById("adviadFrame").appendChild(meta);
+//endregion
+
+//region privacy text & learn more
+document.getElementById("privacy-text").innerHTML = "<p>Adviad Cross-Channel Advertising Platform</p>\n" +
+    "<p>Advertising Service Privacy Policy</p>";
+//endregion
